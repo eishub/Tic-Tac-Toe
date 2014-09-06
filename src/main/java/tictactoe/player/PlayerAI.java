@@ -6,14 +6,14 @@ import tictactoe.game.TicTacToe;
  * AI Player.
  * 
  * @author Yohann CIURLIK
+ * @author Koen
  * @since 1.2
- * @modified koen
  */
 public class PlayerAI extends Player {
 
 	/* Skill level of AI player */
 	int skillLevel;
-	/* TODO Nombre de coups calculés par l'AI */
+	/* TODO Nombre de coups calculs par l'AI */
 	int nbCoups;
 
 	/**
@@ -36,12 +36,12 @@ public class PlayerAI extends Player {
 	public int coupOrdi() {
 		PlayerType[][] position = new PlayerType[3][3];
 		int coupsuiv = 0;
-		/* On remet a 0 le nbre de cp calculés */
+		/* On remet a 0 le nbre de cp calculs */
 		nbCoups = 0;
 		int temp;
 		int max;
 
-		/* Adapte l'algorithme à un type de joueur MIN ou MAX */
+		/* Adapte l'algorithme  un type de joueur MIN ou MAX */
 		if (getType() == PlayerType.OPLAYER) {
 			max = 1;
 		} else {
@@ -59,7 +59,7 @@ public class PlayerAI extends Player {
 						position[a][b] = TicTacToe.getConfiguration()
 								.getGameBoardConfiguration()[a][b];
 
-				/* Test pour savoir si un coup a déjà été joué dans cette case */
+				/* Test pour savoir si un coup a dj t jou dans cette case */
 				if (position[i][j] == PlayerType.NONE) {
 					if ((position[2][2] == PlayerType.XPLAYER)
 							&& (position[1][2] == PlayerType.XPLAYER)
@@ -92,7 +92,7 @@ public class PlayerAI extends Player {
 		PlayerType[][] position = new PlayerType[3][3];
 		int temp;
 		
-		nbCoups++; /* Incrementation du nbre de cps calculés */
+		nbCoups++; /* Incrementation du nbre de cps calculs */
 		if ((p <= 0) || terminalConfiguration(pos)) {
 			if (skillLevel < 6) {
 				return new Configuration(pos).evaluation();
@@ -108,7 +108,7 @@ public class PlayerAI extends Player {
 							position[a][b] = pos[a][b];
 
 					/*
-					 * Test por savoir si un coup a déjà été joué dans cette
+					 * Test por savoir si un coup a dj t jou dans cette
 					 * case
 					 */
 					if (position[i][j] == PlayerType.NONE) {

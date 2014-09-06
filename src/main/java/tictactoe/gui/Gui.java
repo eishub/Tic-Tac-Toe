@@ -19,7 +19,7 @@ import tictactoe.game.TicTacToe;
 /**
  * Shows game board and options.
  * 
- * @modified K.Hindriks
+ * @author K.Hindriks
  */
 public class Gui extends JFrame {
 

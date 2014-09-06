@@ -29,7 +29,7 @@ import tictactoe.player.PlayerType;
  * Panel with options and information related to game.
  * 
  * @author spawnrider
- * @modified koen
+ * @author koen
  */
 public class OptionPanel extends JPanel {
 
@@ -255,12 +255,12 @@ public class OptionPanel extends JPanel {
 	// }
 
 	/**
-	 * Donne le nombre de cp calculés par un joueur AI durant une recherche
+	 * Donne le nombre de cp calculs par un joueur AI durant une recherche
 	 * 
 	 * @param nbCoups
-	 *            Nombre de coups calculés par l'IA
+	 *            Nombre de coups calculs par l'IA
 	 * @param player
-	 *            Joueur qui à calculé ses nbCoups
+	 *            Joueur qui  calcul ses nbCoups
 	 * @since 1.2
 	 */
 	public void setNbCoups(int nbCoups, PlayerType player) {

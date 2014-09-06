@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URL;
 
 /**
- * Exception levée pour indiquer que le son n'a pas été trouvé <br>
+ * Exception leve pour indiquer que le son n'a pas t trouv <br>
  */
 
 public class SonIntrouvableException
@@ -12,7 +12,7 @@ public class SonIntrouvableException
 {
   /**
    * Constrtuit l'exception pour les fichiers
-   * @param fichier Fichier non trouvé
+   * @param fichier Fichier non trouv
    */
   public SonIntrouvableException(File fichier)
   {
@@ -20,7 +20,7 @@ public class SonIntrouvableException
   }
   /**
    * Construit l'exception pour les URL
-   * @param url URL non trouvée
+   * @param url URL non trouve
    */
   public SonIntrouvableException(URL url)
   {
@@ -28,7 +28,7 @@ public class SonIntrouvableException
   }
   /**
    * Construit l'exception pour les sons de la ressource
-   * @param nom Nom de la ressource non trouvée
+   * @param nom Nom de la ressource non trouve
    */
   public SonIntrouvableException(String nom)
   {

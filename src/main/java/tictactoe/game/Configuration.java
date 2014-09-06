@@ -11,7 +11,7 @@ import tictactoe.player.PlayerType;
  * 
  * @author Yohann CIURLIK
  * @since 1.1
- * @modified koen
+ * @author koen
  */
 public class Configuration {
 
@@ -46,8 +46,8 @@ public class Configuration {
 	 *            Player who occupies position.
 	 */
 	public Configuration(Configuration previous, int p, PlayerType player) {
-		/* On recopie la conf précédente et on ajoute la position p */
-		/* On recopie la conf précédente */
+		/* On recopie la conf prcdente et on ajoute la position p */
+		/* On recopie la conf prcdente */
 		PlayerType[][] tabP = previous.getGameBoardConfiguration();
 		gameBoardConfiguration = new PlayerType[3][3];
 		for (int i = 0; i < 3; i++) {
@@ -106,6 +106,7 @@ public class Configuration {
 	
 	/**
 	 * Returns whether square position is free.
+     * @param position position
 	 * @return true if position is free; false otherwise.
 	 */
 	public boolean isFree(int position) {
@@ -179,10 +180,9 @@ public class Configuration {
 
 	/**
 	 * Returns the player whose turn it is.
-	 * 
-	 * @param currentPlayer
-	 *            player whose turn it is.
+	 *
 	 * @since 1.1
+     * @return the current player
 	 */
 	public PlayerType getCurrentPlayerType() {
 		return currentPlayer;

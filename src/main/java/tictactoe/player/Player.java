@@ -4,7 +4,7 @@ package tictactoe.player;
  * Player class.
  * 
  * @author Yohann CIURLIK
- * @modified K.Hindriks
+ * @author K.Hindriks
  */
 public abstract class Player {
 

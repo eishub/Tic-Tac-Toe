@@ -1,7 +1,7 @@
 package tictactoe.sound.exceptions;
 
 /**
- * Exception levée si le type de son n'est pas reconnu <br>
+ * Exception leve si le type de son n'est pas reconnu <br>
  */
 
 public class SonTypeException

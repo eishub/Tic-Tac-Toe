@@ -1,7 +1,7 @@
 package tictactoe.sound.exceptions;
 
 /**
- * Exception levée pour signaler une erreur de lecture du son <br>
+ * Exception leve pour signaler une erreur de lecture du son <br>
  */
 
 public class SonErreurLecture

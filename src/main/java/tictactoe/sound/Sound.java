@@ -20,14 +20,14 @@ import tictactoe.sound.exceptions.SonIntrouvableException;
 import tictactoe.sound.exceptions.SonTypeException;
 
 /**
- * Représente un son. <br>
- * Si le son ne sera plus utilisé, il faut le détruire par la méthode fermer, <br>
- * afin de libérer la mémoire et le flux où se trouve le son. <br>
- * Attention, une fois détruit, le son n'est plus utilisable. <br>
+ * Reprsente un son. <br>
+ * Si le son ne sera plus utilis, il faut le dtruire par la mthode fermer, <br>
+ * afin de librer la mmoire et le flux o se trouve le son. <br>
+ * Attention, une fois dtruit, le son n'est plus utilisable. <br>
  */
 
 public class Sound implements Runnable {
-	// Durée du son
+	// Dure du son
 	private Duree duree;
 	// Flux de kecture audio
 	private AudioInputStream lecteurAudio;
@@ -35,36 +35,36 @@ public class Sound implements Runnable {
 	private AudioFormat format;
 	// Clip jouant le son
 	private Clip clip;
-	// Thread permettant de jouer le son en tâche de fond
+	// Thread permettant de jouer le son en tche de fond
 	private Thread thread;
-	// Nombre de boucle restante à effectué
+	// Nombre de boucle restante  effectu
 	private int tour;
 	// pause : inqique si le son est en pause ou non
-	// fermerALaFin : indique si le son doit être détruit une fois la derniére
-	// boucle de son exécutée
+	// fermerALaFin : indique si le son doit tre dtruit une fois la dernire
+	// boucle de son excute
 	private boolean pause, fermerALaFin;
-	// Ecouteurs des événement sons
+	// Ecouteurs des vnement sons
 	private Vector ecouteurs = new Vector();
 
 	/**
-	 * Construit un son situé à une URL précise
+	 * Construit un son situ  une URL prcise
 	 * 
 	 * @param url
 	 *            URL du son
 	 * @throws SonException
-	 *             Si il y a un probléme de construction du son
+	 *             Si il y a un problme de construction du son
 	 */
 	public Sound(URL url) throws SonException {
 		this.initialise(url);
 	}
 
 	/**
-	 * Construit un son à partir d'un fichier
+	 * Construit un son  partir d'un fichier
 	 * 
 	 * @param fichier
 	 *            Fichier contenant le son
 	 * @throws SonException
-	 *             Si il y a un problème de construction du son
+	 *             Si il y a un problme de construction du son
 	 */
 	public Sound(File fichier) throws SonException {
 		if (!fichier.exists()) {
@@ -76,9 +76,9 @@ public class Sound implements Runnable {
 	// Initialise le son
 	private void initialise(File fichier) throws SonException {
 		try {
-			// Crée le flux
+			// Cre le flux
 			this.lecteurAudio = AudioSystem.getAudioInputStream(fichier);
-			// Récupére le format de codage du son
+			// Rcupre le format de codage du son
 			this.format = lecteurAudio.getFormat();
 
 			// On ne peut pas ouvrir directement des format ALAW/ULA, il faut
@@ -99,13 +99,13 @@ public class Sound implements Runnable {
 				// On a convertit le format, si bien qu'il change
 				this.format = tmp;
 			}
-			// On crée une information avec le format du flux et en caculant la
+			// On cre une information avec le format du flux et en caculant la
 			// logueneur totale du son
 			DataLine.Info info = new DataLine.Info(Clip.class,
 					this.lecteurAudio.getFormat(),
 					((int) this.lecteurAudio.getFrameLength() * this.format
 							.getFrameSize()));
-			// Grac à cette information, on peut creer un clip
+			// Grac  cette information, on peut creer un clip
 			this.clip = (Clip) AudioSystem.getLine(info);
 			// On ouvre le son
 			reouvrir();
@@ -117,15 +117,15 @@ public class Sound implements Runnable {
 			throw new SonErreurDiverse(e);
 		}
 
-		// On calcul la durée du son en microseconde
+		// On calcul la dure du son en microseconde
 		this.duree = new Duree(this.longueurSonMicroseconde());
 	}
 
 	private void initialise(URL url) throws SonException {
 		try {
-			// Crée le flux
+			// Cre le flux
 			this.lecteurAudio = AudioSystem.getAudioInputStream(url);
-			// Récupére le format de codage du son
+			// Rcupre le format de codage du son
 			this.format = lecteurAudio.getFormat();
 
 			// On ne peut pas ouvrir directement des format ALAW/ULA, il faut
@@ -146,13 +146,13 @@ public class Sound implements Runnable {
 				// On a convertit le format, si bien qu'il change
 				this.format = tmp;
 			}
-			// On crée une information avec le format du flux et en caculant la
+			// On cre une information avec le format du flux et en caculant la
 			// logueneur totale du son
 			DataLine.Info info = new DataLine.Info(Clip.class,
 					this.lecteurAudio.getFormat(),
 					((int) this.lecteurAudio.getFrameLength() * this.format
 							.getFrameSize()));
-			// Grac à cette information, on peut creer un clip
+			// Grac  cette information, on peut creer un clip
 			this.clip = (Clip) AudioSystem.getLine(info);
 			// On ouvre le son
 			reouvrir();
@@ -164,7 +164,7 @@ public class Sound implements Runnable {
 			throw new SonErreurDiverse(e);
 		}
 
-		// On calcul la durée du son en microseconde
+		// On calcul la dure du son en microseconde
 		this.duree = new Duree(this.longueurSonMicroseconde());
 	}
 
@@ -185,7 +185,7 @@ public class Sound implements Runnable {
 	 * Joue le son plusieurs fois
 	 * 
 	 * @param nbFois
-	 *            Nombre de fois que le son est joué
+	 *            Nombre de fois que le son est jou
 	 */
 	public void boucle(int nbFois) {
 		// Si le son n'est pas initialiser, on l'initialise
@@ -198,15 +198,15 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Joue le son un tn trés grand nombre de fois
+	 * Joue le son un tn trs grand nombre de fois
 	 */
 	public void boucle() {
 		this.boucle(Integer.MAX_VALUE);
 	}
 
 	/**
-	 * Action du son, ne jamais appelé cette méthode directement, elle est
-	 * public pour respecter l'implémentation de Runnable
+	 * Action du son, ne jamais appel cette mthode directement, elle est
+	 * public pour respecter l'implmentation de Runnable
 	 */
 	public void run() {
 		// Tant que le son est vivant
@@ -240,16 +240,16 @@ public class Sound implements Runnable {
 						break;
 					}
 				}
-				// Arréte le son
+				// Arrte le son
 				this.clip.stop();
-				// On se place au début du son
+				// On se place au dbut du son
 				this.placeMicroseconde(0);
-				// On à un tour de moins à jouer
+				// On  un tour de moins  jouer
 				this.tour--;
 				if (this.tour < 1) {
 					// Si on a fini de jouer, on tremine
 					this.terminer();
-					// Si on doit fermer à la fin, on ferme définitivement le
+					// Si on doit fermer  la fin, on ferme dfinitivement le
 					// son
 					if (this.fermerALaFin) {
 						this.fermer();
@@ -259,7 +259,7 @@ public class Sound implements Runnable {
 		}
 	}
 
-	// Permet de réouvrir le son, ou de l'ouvrir
+	// Permet de rouvrir le son, ou de l'ouvrir
 	private void reouvrir() throws Exception {
 		this.clip.open(this.lecteurAudio);
 	}
@@ -268,7 +268,7 @@ public class Sound implements Runnable {
 	 * Met le son en pause
 	 */
 	public void pause() {
-		// Si on est pas déjà en pause, on se met en pause
+		// Si on est pas dj en pause, on se met en pause
 		if (!this.pause) {
 			this.clip.stop();
 			this.pause = true;
@@ -276,10 +276,10 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Reprend le son ou il était rendu (enlève la pause)
+	 * Reprend le son ou il tait rendu (enlve la pause)
 	 */
 	public void reprise() {
-		// Si on est en pause, on enléve la pause
+		// Si on est en pause, on enlve la pause
 		if (this.pause) {
 			pause = false;
 			this.clip.start();
@@ -287,7 +287,7 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Arrête de jouer le son et retour du son au début
+	 * Arrte de jouer le son et retour du son au dbut
 	 */
 	public void stop() {
 		this.clip.stop();
@@ -298,7 +298,7 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Détruit proprement le son
+	 * Dtruit proprement le son
 	 */
 	public void fermer() {
 		this.stop();
@@ -311,20 +311,20 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Indique si le son sera détruit aprés sa derniére fois ou il joue
+	 * Indique si le son sera dtruit aprs sa dernire fois ou il joue
 	 * 
-	 * @return <b>true</b> si le son est détruit quand c'est finit
+	 * @return <b>true</b> si le son est dtruit quand c'est finit
 	 */
 	public boolean estFermerALaFin() {
 		return fermerALaFin;
 	}
 
 	/**
-	 * Change l'état de fermeture à la fin
+	 * Change l'tat de fermeture  la fin
 	 * 
 	 * @param fermer
-	 *            <b>true</b> pour indiqué que l'on désire que le son soit
-	 *            détruit aprés la derniére fois qu'il joue
+	 *            <b>true</b> pour indiqu que l'on dsire que le son soit
+	 *            dtruit aprs la dernire fois qu'il joue
 	 */
 	public void setFermerALaFin(boolean fermer) {
 		this.fermerALaFin = fermer;
@@ -340,45 +340,45 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Nombre de microsecondes écoulées depuis le début du son
+	 * Nombre de microsecondes coules depuis le dbut du son
 	 * 
-	 * @return Durée en microseconde de l'écoute
+	 * @return Dure en microseconde de l'coute
 	 */
 	public long getRenduMicroseconde() {
 		return this.clip.getMicrosecondPosition();
 	}
 
 	/**
-	 * Durée de l'écoute
+	 * Dure de l'coute
 	 * 
-	 * @return Durée de l'écoute
+	 * @return Dure de l'coute
 	 */
 	public Duree getRendu() {
 		return new Duree(this.getRenduMicroseconde());
 	}
 
 	/**
-	 * Place le son à cette durée en milliseconde.
+	 * Place le son  cette dure en milliseconde.
 	 * 
 	 * @param microseconde
-	 *            Place à laquelle on désire commencé le son
+	 *            Place  laquelle on dsire commenc le son
 	 */
 	public void placeMicroseconde(long microseconde) {
 		this.clip.setMicrosecondPosition(microseconde);
 	}
 
 	/**
-	 * Place le son à cette durée
+	 * Place le son  cette dure
 	 * 
 	 * @param duree
-	 *            Place à laquelle on désire commencé le son
+	 *            Place  laquelle on dsire commenc le son
 	 */
 	public void placeDuree(Duree duree) {
 		this.placeMicroseconde(duree.getMicroseconde());
 	}
 
 	/**
-	 * Remet le son au départ
+	 * Remet le son au dpart
 	 */
 	public void placeDepart() {
 		this.clip.setMicrosecondPosition(0);
@@ -394,19 +394,19 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Indique si le son est entrain d'être jouer
+	 * Indique si le son est entrain d'tre jouer
 	 * 
-	 * @return <b>true</b> si le son est entrain d'être joué
+	 * @return <b>true</b> si le son est entrain d'tre jou
 	 */
 	public boolean estEntrainDeJouer() {
 		return !this.pause && (this.tour > 0);
 	}
 
 	/**
-	 * Ajout un écouteur d'événement son
+	 * Ajout un couteur d'vnement son
 	 * 
 	 * @param ecouteur
-	 *            Ecouteur ajouté
+	 *            Ecouteur ajout
 	 */
 	public void ajouteEcouteurSon(EcouteurSon ecouteur) {
 		if (ecouteur != null) {
@@ -415,10 +415,10 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Retire un écouteur d'événement son
+	 * Retire un couteur d'vnement son
 	 * 
 	 * @param ecouteur
-	 *            Ecouteur retiré
+	 *            Ecouteur retir
 	 */
 	public void retireEcouteurSon(EcouteurSon ecouteur) {
 		if (ecouteur != null) {
@@ -426,7 +426,7 @@ public class Sound implements Runnable {
 		}
 	}
 
-	// Indique à tout les écouteurs d'événements son, que le son est terminé
+	// Indique  tout les couteurs d'vnements son, que le son est termin
 	private void terminer() {
 		Thread t = new Thread() {
 			public void run() {
@@ -436,7 +436,7 @@ public class Sound implements Runnable {
 		t.start();
 	}
 
-	// Indique à tout les écouteurs d'événements son, que le son est terminé
+	// Indique  tout les couteurs d'vnements son, que le son est termin
 	private void terminer1() {
 		int nb = this.ecouteurs.size();
 		for (int i = 0; i < nb; i++) {
@@ -445,7 +445,7 @@ public class Sound implements Runnable {
 		}
 	}
 
-	// Indique à tout les écouteurs d'événements son, que le son a avancé
+	// Indique  tout les couteurs d'vnements son, que le son a avanc
 	private void avancer() {
 		Thread t = new Thread() {
 			public void run() {
@@ -455,7 +455,7 @@ public class Sound implements Runnable {
 		t.start();
 	}
 
-	// Indique à tout les écouteurs d'événements son, que le son a avancé
+	// Indique  tout les couteurs d'vnements son, que le son a avanc
 	private void avancer1() {
 		int nb = this.ecouteurs.size();
 		for (int i = 0; i < nb; i++) {
@@ -465,9 +465,9 @@ public class Sound implements Runnable {
 	}
 
 	/**
-	 * Renvoie la durée du son
+	 * Renvoie la dure du son
 	 * 
-	 * @return La durée du son
+	 * @return La dure du son
 	 */
 	public Duree getDuree() {
 		return this.duree;

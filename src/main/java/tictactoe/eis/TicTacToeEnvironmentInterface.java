@@ -108,8 +108,8 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 
 	/**
 	 * Only after informing both players about the end of game state the state
-	 * of the environment can be transitioned to {@link EnvironmentState.PAUSED}
-	 * .
+	 * of the environment can be transitioned to {link eis.EnvironmentState.PAUSED}
+     * TODO Link not working.
 	 */
 	private boolean informedXPlayerOfEndOfGame = false;
 	private boolean informedOPlayerOfEndOfGame = false;
@@ -143,7 +143,11 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 	/**************************************************************/
 	/******************** Support functions ***********************/
 	/**************************************************************/
-
+    /**
+     *
+     * @param position position
+     * @param player player
+     */
 	public void actionoccupy(int position, String player) {
 
 		PlayerType playerType = PlayerType.fromString(player);

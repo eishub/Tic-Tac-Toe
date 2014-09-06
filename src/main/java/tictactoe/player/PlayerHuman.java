@@ -4,8 +4,8 @@ package tictactoe.player;
  * Human player.
  * 
  * @author Yohann CIURLIK
+ * @author Koen
  * @since 1.2
- * @modified koen
  */
 public class PlayerHuman extends Player {
 

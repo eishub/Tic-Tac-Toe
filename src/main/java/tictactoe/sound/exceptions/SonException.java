@@ -1,7 +1,7 @@
 package tictactoe.sound.exceptions;
 
 /**
- * Excpetion générale <br>
+ * Excpetion gnrale <br>
  */
 
 public class SonException

@@ -14,8 +14,8 @@ import tictactoe.player.PlayerType;
  * Allows to obtain the current instance statically.
  * 
  * @author Yohann CIURLIK
- * @modified K.Hindriks
- * @modified W.Pasman 5jul12 added {@link #closeTicTacToe()}.
+ * @author K.Hindriks
+ * @author W.Pasman 5jul12 added {@link #closeTicTacToe()}.
  */
 public class TicTacToe {
 
@@ -190,7 +190,7 @@ public class TicTacToe {
 	 */
 	public void gameAIvsAI() {
 		/*
-		 * Crée une nouvelle configuration avec un coup aléatoire de l'AI
+		 * Cre une nouvelle configuration avec un coup alatoire de l'AI
 		 * numero1
 		 */
 		configuration = new Configuration(configuration, getRandomPosition(),

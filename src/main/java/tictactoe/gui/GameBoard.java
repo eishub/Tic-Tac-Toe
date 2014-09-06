@@ -23,7 +23,7 @@ import tictactoe.sound.Sound;
  * Handles events by user.
  * 
  * @since 1.0a
- * @modified koen
+ * @author koen
  */
 public class GameBoard extends JPanel {
 
@@ -139,7 +139,7 @@ public class GameBoard extends JPanel {
 		Graphics g2d = (Graphics2D) g;
 
 		g2d.setColor(Color.WHITE);
-		/* Création du fond blanc */
+		/* Cration du fond blanc */
 		g2d.fill3DRect(morpX, morpY, morpSizeX, morpSizeY, true);
 		g2d.setColor(Color.BLACK);
 		/* Creation du cadre noir */
@@ -307,7 +307,7 @@ public class GameBoard extends JPanel {
 	}
 
 	/**
-	 * Plays sound TODO permettant de savoir qu'un joueur à jouer
+	 * Plays sound TODO permettant de savoir qu'un joueur  jouer
 	 * 
 	 * @since 1.1a
 	 */
