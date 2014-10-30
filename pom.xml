@@ -4,7 +4,7 @@
 
 	<groupId>eishub</groupId>
 	<artifactId>tic-tac-toe</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 	<name>tic-tac-toe</name>
 	<description>Tic-Tac-Toe Environment</description>
 	<url>http://www.github.com/eishub/Tic-Tac-Toe</url>

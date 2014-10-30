@@ -208,7 +208,7 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 	 */
 	@Override
 	public String requiredVersion() {
-		return "0.3";
+		return "0.4";
 	}
 
 	/**
