@@ -108,8 +108,8 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 
 	/**
 	 * Only after informing both players about the end of game state the state
-	 * of the environment can be transitioned to {link eis.EnvironmentState.PAUSED}
-     * TODO Link not working.
+	 * of the environment can be transitioned to {link
+	 * eis.EnvironmentState.PAUSED} TODO Link not working.
 	 */
 	private boolean informedXPlayerOfEndOfGame = false;
 	private boolean informedOPlayerOfEndOfGame = false;
@@ -143,11 +143,13 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 	/**************************************************************/
 	/******************** Support functions ***********************/
 	/**************************************************************/
-    /**
-     *
-     * @param position position
-     * @param player player
-     */
+	/**
+	 *
+	 * @param position
+	 *            position
+	 * @param player
+	 *            player
+	 */
 	public void actionoccupy(int position, String player) {
 
 		PlayerType playerType = PlayerType.fromString(player);
@@ -200,16 +202,6 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 	/**************************************************************/
 	/********** Implements EnvironmentInterface *******************/
 	/**************************************************************/
-
-	/**
-	 * Supports EIS v0.3.
-	 * 
-	 * @see eis.EnvironmentInterfaceStandard#requiredVersion()
-	 */
-	@Override
-	public String requiredVersion() {
-		return "0.4";
-	}
 
 	/**
 	 * Returns current board configuration as list of percepts and the player
@@ -338,6 +330,19 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 		TicTacToe.getGui();
 		TicTacToe.getTicTacToe().newGame();
 		setState(EnvironmentState.PAUSED);
+
+		// now make entities available via eis, if not already so
+		try {
+			if (!getEntities().contains("xplayer")) {
+				this.addEntity("xplayer");
+			}
+			if (!getEntities().contains("oplayer")) {
+				this.addEntity("oplayer");
+			}
+		} catch (EntityException e) {
+			throw new ManagementException("failed to announce entities", e);
+		}
+
 		setState(EnvironmentState.RUNNING);
 	}
 
@@ -441,14 +446,6 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 					case AGENT:
 						TicTacToe.getTicTacToe().setPlayer1(
 								new PlayerAgent(PlayerType.XPLAYER));
-						// now make entity available via eis, if not already so
-						if (!getEntities().contains("xplayer")) {
-							try {
-								this.addEntity("xplayer");
-							} catch (EntityException e) {
-								e.printStackTrace();
-							}
-						}
 						break;
 					case AI:
 						TicTacToe.getTicTacToe().setPlayer1(
@@ -478,14 +475,6 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 					case AGENT:
 						TicTacToe.getTicTacToe().setPlayer2(
 								new PlayerAgent(PlayerType.OPLAYER));
-						// now make entity available via eis, if not already so
-						if (!getEntities().contains("oplayer")) {
-							try {
-								this.addEntity("oplayer");
-							} catch (EntityException e) {
-								e.printStackTrace();
-							}
-						}
 						break;
 					case AI:
 						TicTacToe.getTicTacToe().setPlayer2(
