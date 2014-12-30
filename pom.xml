@@ -66,7 +66,7 @@ A tic-tac-toe gameboard on which two agents can play tic-tac-toe</description>
 		<dependency>
 			<groupId>eishub</groupId>
 			<artifactId>eis</artifactId>
-			<version>0.5.0</version>
+			<version>0.5.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
