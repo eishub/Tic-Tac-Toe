@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,253 +21,153 @@ import tictactoe.player.PlayerType;
 
 /**
  * PanelOption.java
- * 
+ *
  * Created on 7 January 2006, 21:45
- * 
+ *
  * Panel with options and information related to game.
- * 
+ *
  * @author spawnrider
  * @author koen
  */
 public class OptionPanel extends JPanel {
-
 	private static final long serialVersionUID = 1L;
 
 	/* Labels */
-	private JLabel nbPj1, nbPj2, nbPnul;
-	private JLabel nbPj1x, nbPj2x, nbPnulx;
-	private JLabel nbCoupsJ1, nbCoupsJ2;
+	private final JLabel nbPj1, nbPj2, nbPnul;
+	private final JLabel nbPj1x, nbPj2x, nbPnulx;
+	private final JLabel nbCoupsJ1, nbCoupsJ2;
 	/* Information Panels */
-	private JPanel panelStat, panelPlayer, panelJ1, panelJ2, panelButton;
+	private final JPanel panelStat;
+	private JPanel panelPlayer;
+	private final JPanel panelJ1;
+	private final JPanel panelJ2;
+	private final JPanel panelButton;
 	/* new game button */
-	private JButton newGameButton;
+	private final JButton newGameButton;
 	/* Combo boxes for choosing playing strength and type of player */
-	private JComboBox niveauJ1, niveauJ2, j1, j2;
-
-	// FIXME use PlayerKind class
-	// private static final String HUMAN = "Human Player";
-	// private static final String COMPUTER = "Computer";
-	// private String[] playerkinds = { HUMAN, COMPUTER };
+	private final JComboBox<String> niveauJ1, niveauJ2;
+	private final JComboBox<PlayerKind> j1, j2;
 	/* Game playing strength options for computer player */
-	private String[] playingStrength = { "2", "3", "4", "5", "6", "7", "8" };
+	private final String[] playingStrength = { "2", "3", "4", "5", "6", "7", "8" };
 
 	/**
 	 * Creates a panel with options
-	 * 
+	 *
 	 * @since 1.1
 	 */
 	public OptionPanel() {
 		setLayout(new GridLayout(3, 1));
-		setBorder(new TitledBorder(new EtchedBorder(), "Statistics",
-				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+		setBorder(
+				new TitledBorder(new EtchedBorder(), "Statistics", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
-		nbPj1 = new JLabel("Player 1", SwingConstants.LEFT);
-		nbPj1.setIcon(new javax.swing.ImageIcon(OptionPanel.class
-				.getResource("images/cross_mini.png")));
+		this.nbPj1 = new JLabel("Player 1", SwingConstants.LEFT);
+		this.nbPj1.setIcon(new javax.swing.ImageIcon(OptionPanel.class.getResource("images/cross_mini.png")));
 
-		nbPj2 = new JLabel("Player 2", SwingConstants.LEFT);
-		nbPj2.setIcon(new javax.swing.ImageIcon(OptionPanel.class
-				.getResource("images/nought_mini.png")));
-		nbPnul = new JLabel("Draws", SwingConstants.LEFT);
+		this.nbPj2 = new JLabel("Player 2", SwingConstants.LEFT);
+		this.nbPj2.setIcon(new javax.swing.ImageIcon(OptionPanel.class.getResource("images/nought_mini.png")));
+		this.nbPnul = new JLabel("Draws", SwingConstants.LEFT);
 
-		nbPj1x = new JLabel("0", SwingConstants.CENTER);
-		nbPj2x = new JLabel("0", SwingConstants.CENTER);
-		nbPnulx = new JLabel("0", SwingConstants.CENTER);
-		nbCoupsJ1 = new JLabel("Cp : 0", SwingConstants.CENTER);
-		nbCoupsJ2 = new JLabel("Cp : 0", SwingConstants.CENTER);
+		this.nbPj1x = new JLabel("0", SwingConstants.CENTER);
+		this.nbPj2x = new JLabel("0", SwingConstants.CENTER);
+		this.nbPnulx = new JLabel("0", SwingConstants.CENTER);
+		this.nbCoupsJ1 = new JLabel("Cp : 0", SwingConstants.CENTER);
+		this.nbCoupsJ2 = new JLabel("Cp : 0", SwingConstants.CENTER);
 
-		j1 = new JComboBox(PlayerKind.values());
-		j1.setEditable(true);
-		j1.setSelectedItem(TicTacToe.getTicTacToe().getPlayer1()
-				.getKindofPlayer());
+		this.j1 = new JComboBox<>(PlayerKind.values());
+		this.j1.setEditable(true);
+		this.j1.setSelectedItem(TicTacToe.getTicTacToe().getPlayer1().getKindofPlayer());
 		// disabled #3038
-		j1.setEnabled(false);
-		// j1.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent e) {
-		// String selectedItem = (String) j1.getSelectedItem();
-		// if (selectedItem == HUMAN) {
-		// setPlayer(PlayerType.XPLAYER, PlayerKind.HUMAN);
-		// } else if (selectedItem == COMPUTER) {
-		// setPlayer(PlayerType.XPLAYER, PlayerKind.AI);
-		// }
-		// }
-		// });
+		this.j1.setEnabled(false);
 
-		j2 = new JComboBox(PlayerKind.values());
-		j2.setEditable(true);
-		j2.setSelectedItem(TicTacToe.getTicTacToe().getPlayer2()
-				.getKindofPlayer());
+		this.j2 = new JComboBox<>(PlayerKind.values());
+		this.j2.setEditable(true);
+		this.j2.setSelectedItem(TicTacToe.getTicTacToe().getPlayer2().getKindofPlayer());
 		// disabled #3038
-		j2.setEnabled(false);
-		// j2.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent e) {
-		// String selectedItem = (String) j2.getSelectedItem();
-		// if (selectedItem == HUMAN) {
-		// setPlayer(PlayerType.OPLAYER, PlayerKind.HUMAN);
-		// } else if (selectedItem == COMPUTER) {
-		// setPlayer(PlayerType.OPLAYER, PlayerKind.AI);
-		// }
-		// }
-		// });
+		this.j2.setEnabled(false);
 
-		newGameButton = new JButton("New Game");
-		newGameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TicTacToe.getTicTacToe().newGame();
-				TicTacToe.getGui().repaint();
-			}
+		this.newGameButton = new JButton("New Game");
+		this.newGameButton.addActionListener(e -> {
+			TicTacToe.getTicTacToe().newGame();
+			TicTacToe.getGui().repaint();
 		});
 
-		niveauJ1 = new JComboBox(playingStrength);
-		niveauJ1.setEnabled(false);
-		niveauJ1.setSelectedItem("8");
-		niveauJ1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				((PlayerAI) TicTacToe.getTicTacToe().getPlayer1())
-						.setSkillLevel(Integer.parseInt((String) niveauJ1
-								.getSelectedItem()));
-			}
-		});
+		this.niveauJ1 = new JComboBox<>(this.playingStrength);
+		this.niveauJ1.setEnabled(false);
+		this.niveauJ1.setSelectedItem("8");
+		this.niveauJ1.addActionListener(e -> ((PlayerAI) TicTacToe.getTicTacToe().getPlayer1())
+				.setSkillLevel(Integer.parseInt((String) OptionPanel.this.niveauJ1.getSelectedItem())));
 
-		niveauJ2 = new JComboBox(playingStrength);
-		niveauJ2.setSelectedItem("8");
-		niveauJ2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				((PlayerAI) TicTacToe.getTicTacToe().getPlayer2())
-						.setSkillLevel(Integer.parseInt((String) niveauJ2
-								.getSelectedItem()));
-			}
-		});
+		this.niveauJ2 = new JComboBox<>(this.playingStrength);
+		this.niveauJ2.setSelectedItem("8");
+		this.niveauJ2.addActionListener(e -> ((PlayerAI) TicTacToe.getTicTacToe().getPlayer2())
+				.setSkillLevel(Integer.parseInt((String) OptionPanel.this.niveauJ2.getSelectedItem())));
 
-		panelPlayer = new JPanel(new BorderLayout());
-		panelPlayer = new JPanel(new GridLayout(2, 1, 3, 3));
-		panelStat = new JPanel(new GridLayout(3, 2, 3, 3));
-		panelStat.setBorder(new LineBorder(Color.GRAY));
-		panelJ1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		panelJ1.setBorder(new LineBorder(Color.GRAY));
-		panelJ2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		panelJ2.setBorder(new LineBorder(Color.GRAY));
+		this.panelPlayer = new JPanel(new BorderLayout());
+		this.panelPlayer = new JPanel(new GridLayout(2, 1, 3, 3));
+		this.panelStat = new JPanel(new GridLayout(3, 2, 3, 3));
+		this.panelStat.setBorder(new LineBorder(Color.GRAY));
+		this.panelJ1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		this.panelJ1.setBorder(new LineBorder(Color.GRAY));
+		this.panelJ2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		this.panelJ2.setBorder(new LineBorder(Color.GRAY));
 
-		panelStat.add(nbPj1);
-		panelStat.add(nbPj1x);
-		panelStat.add(nbPj2);
-		panelStat.add(nbPj2x);
-		panelStat.add(nbPnul);
-		panelStat.add(nbPnulx);
+		this.panelStat.add(this.nbPj1);
+		this.panelStat.add(this.nbPj1x);
+		this.panelStat.add(this.nbPj2);
+		this.panelStat.add(this.nbPj2x);
+		this.panelStat.add(this.nbPnul);
+		this.panelStat.add(this.nbPnulx);
 
 		/* Player 1 options */
-		panelJ1.add(new JLabel("Player 1:"));
-		panelJ1.add(j1);
-		panelJ1.add(new JLabel("Strength"));
-		panelJ1.add(niveauJ1);
-		panelJ1.add(nbCoupsJ1);
+		this.panelJ1.add(new JLabel("Player 1:"));
+		this.panelJ1.add(this.j1);
+		this.panelJ1.add(new JLabel("Strength"));
+		this.panelJ1.add(this.niveauJ1);
+		this.panelJ1.add(this.nbCoupsJ1);
 		/* Player 2 options */
-		panelJ2.add(new JLabel("Player 2:"));
-		panelJ2.add(j2);
-		panelJ2.add(new JLabel("Strength"));
-		panelJ2.add(niveauJ2);
-		panelJ2.add(nbCoupsJ2);
+		this.panelJ2.add(new JLabel("Player 2:"));
+		this.panelJ2.add(this.j2);
+		this.panelJ2.add(new JLabel("Strength"));
+		this.panelJ2.add(this.niveauJ2);
+		this.panelJ2.add(this.nbCoupsJ2);
 
-		panelPlayer.add(panelJ1);
-		panelPlayer.add(panelJ2);
-		add(panelStat, BorderLayout.NORTH);
-		add(panelPlayer, BorderLayout.CENTER);
+		this.panelPlayer.add(this.panelJ1);
+		this.panelPlayer.add(this.panelJ2);
+		add(this.panelStat, BorderLayout.NORTH);
+		add(this.panelPlayer, BorderLayout.CENTER);
 
-		panelButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		// disabled #3038
-		// panelButton.add(newGameButton);
-		/* add(newGameButton,BorderLayout.SOUTH); */
-		add(panelButton, BorderLayout.SOUTH);
+		this.panelButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		add(this.panelButton, BorderLayout.SOUTH);
 	}
 
 	/**
 	 * Refresh statistics about the number of games each player won.
-	 * 
+	 *
 	 * @since 1.2
 	 */
 	public void refreshStatCounters() {
-		TicTacToe tictactoe = TicTacToe.getTicTacToe();
-		nbPj1x.setText(tictactoe.getGamesWonByXPlayer() + "");
-		nbPj2x.setText(tictactoe.getGamesWonByOplayer() + "");
-		nbPnulx.setText(tictactoe.getDraws() + "");
+		final TicTacToe tictactoe = TicTacToe.getTicTacToe();
+		this.nbPj1x.setText(tictactoe.getGamesWonByXPlayer() + "");
+		this.nbPj2x.setText(tictactoe.getGamesWonByOplayer() + "");
+		this.nbPnulx.setText(tictactoe.getDraws() + "");
 	}
 
 	/**
-	 * Set player
-	 */
-	// public void setPlayer(PlayerType type, PlayerKind kind) {
-	// switch (type) {
-	// case XPLAYER:
-	// switch (kind) {
-	// case HUMAN:
-	// TicTacToe.getTicTacToe().setPlayer1(
-	// new PlayerHuman(PlayerType.XPLAYER));
-	// j1.setSelectedItem("Human Player");
-	// niveauJ1.setEnabled(false);
-	// break;
-	// case AI:
-	// TicTacToe.getTicTacToe().setPlayer1(
-	// new PlayerAI(PlayerType.XPLAYER));
-	// j1.setSelectedItem("Computer");
-	// niveauJ1.setEnabled(true);
-	// break;
-	// case AGENT:
-	// TicTacToe.getTicTacToe().setPlayer1(
-	// new PlayerAgent(PlayerType.XPLAYER));
-	// j1.setSelectedItem("Agent");
-	// j1.setEnabled(false);
-	// niveauJ1.setEnabled(false);
-	// break;
-	// }
-	// break;
-	// case OPLAYER:
-	// switch (kind) {
-	// case HUMAN:
-	// TicTacToe.getTicTacToe().setPlayer2(
-	// new PlayerHuman(PlayerType.OPLAYER));
-	// j2.setSelectedItem("Human Player");
-	// niveauJ2.setEnabled(false);
-	// break;
-	// case AI:
-	// TicTacToe.getTicTacToe().setPlayer2(
-	// new PlayerAI(PlayerType.OPLAYER));
-	// j2.setSelectedItem("Computer");
-	// niveauJ2.setEnabled(true);
-	// break;
-	// case AGENT:
-	// TicTacToe.getTicTacToe().setPlayer2(
-	// new PlayerAgent(PlayerType.OPLAYER));
-	// j2.setSelectedItem("Agent");
-	// j2.setEnabled(false);
-	// niveauJ2.setEnabled(false);
-	// break;
-	// }
-	// break;
-	// }
-	// /* Reset counter */
-	// TicTacToe.getTicTacToe().resetGameStatistics();
-	// refreshStatCounters();
-	// /* Start a new game */
-	// TicTacToe.getTicTacToe().newGame();
-	// TicTacToe.getGui().repaint();
-	// }
-
-	/**
 	 * Donne le nombre de cp calculs par un joueur AI durant une recherche
-	 * 
-	 * @param nbCoups
-	 *            Nombre de coups calculs par l'IA
-	 * @param player
-	 *            Joueur qui  calcul ses nbCoups
+	 *
+	 * @param nbCoups Nombre de coups calculs par l'IA
+	 * @param player  Joueur qui calcul ses nbCoups
 	 * @since 1.2
 	 */
-	public void setNbCoups(int nbCoups, PlayerType player) {
+	public void setNbCoups(final int nbCoups, final PlayerType player) {
 		switch (player) {
 		case XPLAYER:
-			nbCoupsJ1.setText("Cp : " + nbCoups);
+			this.nbCoupsJ1.setText("Cp : " + nbCoups);
 			break;
 		case OPLAYER:
-			nbCoupsJ2.setText("Cp : " + nbCoups);
+			this.nbCoupsJ2.setText("Cp : " + nbCoups);
+			break;
+		default:
 			break;
 		}
 	}

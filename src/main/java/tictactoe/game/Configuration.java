@@ -8,16 +8,15 @@ import tictactoe.player.PlayerType;
  * each of the nine squares. A square can either be empty, occupied by the cross
  * (x) player or by the noughts (o) player. The configuration also keeps track
  * of the player whose turn it is.
- * 
+ *
  * @author Yohann CIURLIK
  * @since 1.1
  * @author koen
  */
 public class Configuration {
-
 	/* keeps track of current player */
 	private PlayerType currentPlayer;
-	private PlayerType[][] gameBoardConfiguration;
+	private final PlayerType[][] gameBoardConfiguration;
 	private boolean endOfGame;
 	private PlayerType winner = null;
 
@@ -25,126 +24,124 @@ public class Configuration {
 	 * Creates the 'empty' configuration with all empty squares.
 	 */
 	public Configuration() {
-		currentPlayer = PlayerType.XPLAYER;
-		endOfGame = false;
-		
-		gameBoardConfiguration = new PlayerType[3][3];
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 3; j++)
-				gameBoardConfiguration[i][j] = PlayerType.NONE;
+		this.currentPlayer = PlayerType.XPLAYER;
+		this.endOfGame = false;
+		this.gameBoardConfiguration = new PlayerType[3][3];
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				this.gameBoardConfiguration[i][j] = PlayerType.NONE;
+			}
+		}
 	}
 
 	/**
 	 * Creates a configuration with position p occupied by player
-	 * 
+	 *
 	 * @since 1.1
-	 * @param previous
-	 *            Configuration previous configuration.
-	 * @param p
-	 *            Square position.
-	 * @param player
-	 *            Player who occupies position.
+	 * @param previous Configuration previous configuration.
+	 * @param p        Square position.
+	 * @param player   Player who occupies position.
 	 */
-	public Configuration(Configuration previous, int p, PlayerType player) {
+	public Configuration(final Configuration previous, final int p, final PlayerType player) {
 		/* On recopie la conf prcdente et on ajoute la position p */
 		/* On recopie la conf prcdente */
-		PlayerType[][] tabP = previous.getGameBoardConfiguration();
-		gameBoardConfiguration = new PlayerType[3][3];
+		final PlayerType[][] tabP = previous.getGameBoardConfiguration();
+		this.gameBoardConfiguration = new PlayerType[3][3];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				gameBoardConfiguration[i][j] = tabP[i][j];
+				this.gameBoardConfiguration[i][j] = tabP[i][j];
 			}
 		}
-		gameBoardConfiguration[(int) (p / 3)][p % 3] = player;
+		this.gameBoardConfiguration[p / 3][p % 3] = player;
 		swap(player);
 	}
 
 	/**
-	 * Creates a copy of a configuration used to evaluate a board configuration.
-	 * No current player is set in this configuration.
-	 * 
-	 * @param gameBoard
-	 *            game board configuration.
+	 * Creates a copy of a configuration used to evaluate a board configuration. No
+	 * current player is set in this configuration.
+	 *
+	 * @param gameBoard game board configuration.
 	 * @since 1.2
 	 */
-	public Configuration(PlayerType gameBoard[][]) {
-		gameBoardConfiguration = new PlayerType[3][3];
+	public Configuration(final PlayerType gameBoard[][]) {
+		this.gameBoardConfiguration = new PlayerType[3][3];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				gameBoardConfiguration[i][j] = gameBoard[i][j];
+				this.gameBoardConfiguration[i][j] = gameBoard[i][j];
 			}
 		}
 	}
 
 	/**
 	 * Evaluates the game board configuration.
-	 * 
+	 *
 	 * @since 1.2
 	 * @return int evaluation 1, 0, -1.
 	 */
 	public int evaluation() {
-		int eval = this.evaluationInterne();
+		final int eval = evaluationInterne();
 		if (eval > 0) {
 			return 1;
 		} else {
 			if (eval < 0) {
 				return -1;
-			} else
+			} else {
 				return 0;
+			}
 		}
 	}
 
 	/**
 	 * Returns the current configuration of the game board.
-	 * 
+	 *
 	 * @since 1.1
 	 * @return int[][] game board configuration (table of 3x3=9 squares).
 	 */
 	public PlayerType[][] getGameBoardConfiguration() {
-		return gameBoardConfiguration;
+		return this.gameBoardConfiguration;
 	}
-	
+
 	/**
 	 * Returns whether square position is free.
-     * @param position position
+	 *
+	 * @param position position
 	 * @return true if position is free; false otherwise.
 	 */
-	public boolean isFree(int position) {
-		return (gameBoardConfiguration[(int) (position / 3)][position % 3] == PlayerType.NONE);
+	public boolean isFree(final int position) {
+		return (this.gameBoardConfiguration[position / 3][position % 3] == PlayerType.NONE);
 	}
-	
+
 	/**
 	 * In case game has ended, prints winner and asks whether user wants to play
 	 * another game.
-	 * 
+	 *
 	 * @return boolean true if game has ended; false otherwise.
 	 */
 	public boolean isEndOfGame() {
 		// if we already know game has ended, return immediately.
-		if (endOfGame) {
-			return endOfGame;
+		if (this.endOfGame) {
+			return this.endOfGame;
 		}
-		
-		PlayerType winner = TicTacToe.getConfiguration().determineWinner();
-		endOfGame = (winner != PlayerType.NONE);
+
+		final PlayerType winner = TicTacToe.getConfiguration().determineWinner();
+		this.endOfGame = (winner != PlayerType.NONE);
 
 		// Check for draws; it's a draw if all positions have been occupied
 		// and there is no winner.
-		if (!endOfGame) {
-			endOfGame = true;
-			PlayerType[][] tabCase = TicTacToe.getConfiguration()
-					.getGameBoardConfiguration();
+		if (!this.endOfGame) {
+			this.endOfGame = true;
+			final PlayerType[][] tabCase = TicTacToe.getConfiguration().getGameBoardConfiguration();
 
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
 					if (tabCase[i][j] == PlayerType.NONE) {
-						endOfGame = false;
+						this.endOfGame = false;
 					}
 				}
 			}
 		}
 
-		if (!endOfGame) {
+		if (!this.endOfGame) {
 			return false;
 		}
 
@@ -170,11 +167,11 @@ public class Configuration {
 		if (TicTacToe.showGui) {
 			TicTacToe.getGui().getOptionPanel().refreshStatCounters();
 		}
-		
+
 		/**
 		 * Reset player; end of game, no one can make a move anymore
 		 */
-		currentPlayer = PlayerType.NONE;
+		this.currentPlayer = PlayerType.NONE;
 		return true;
 	}
 
@@ -182,38 +179,38 @@ public class Configuration {
 	 * Returns the player whose turn it is.
 	 *
 	 * @since 1.1
-     * @return the current player
+	 * @return the current player
 	 */
 	public PlayerType getCurrentPlayerType() {
-		return currentPlayer;
+		return this.currentPlayer;
 	}
 
 	/**
-	 * Sets the player whose turn it is. When game has started, players should
-	 * take turns starting with the x player.
-	 * 
-	 * @param player
-	 *            player whose turn it is.
+	 * Sets the player whose turn it is. When game has started, players should take
+	 * turns starting with the x player.
+	 *
+	 * @param player player whose turn it is.
 	 * @since 1.1
 	 */
-	public void setCurrentPlayerType(PlayerType player) {
+	public void setCurrentPlayerType(final PlayerType player) {
 		this.currentPlayer = player;
 	}
-	
+
 	/**
 	 * Swaps current player to other (x or o) type.
+	 *
 	 * @param player PlayerType current player.
 	 */
-	public void swap(PlayerType player) {
+	public void swap(final PlayerType player) {
 		if (player == PlayerType.XPLAYER) {
 			this.currentPlayer = PlayerType.OPLAYER;
 		} else {
 			this.currentPlayer = PlayerType.XPLAYER;
 		}
 	}
-	
+
 	public Player getCurrentPlayer() {
-		switch(currentPlayer) {
+		switch (this.currentPlayer) {
 		case XPLAYER:
 			return TicTacToe.getTicTacToe().getPlayer1();
 		case OPLAYER:
@@ -222,53 +219,49 @@ public class Configuration {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Returns winner of game, if any and game has finished.
-	 * @return PlayerType XPLAYER if x player has won;
-	 * 		OPLAYER if o player has won;
-	 * 		NONE if game ended in draw;
-	 * 		null if game is still ongoing.
+	 *
+	 * @return PlayerType XPLAYER if x player has won; OPLAYER if o player has won;
+	 *         NONE if game ended in draw; null if game is still ongoing.
 	 */
 	public PlayerType getWinner() {
-		return winner;
+		return this.winner;
 	}
-	
+
 	/**
 	 * Return who occupies a square, if any.
-	 * 
-	 * @param num
-	 * 			number of square.
+	 *
+	 * @param num number of square.
 	 * @return PlayerType either XPLAYER, OPLAYER, or NONE.
 	 */
-	public PlayerType getPlayerAtSquare(int num) {
-		return gameBoardConfiguration[(int) (num / 3)][num % 3];
+	public PlayerType getPlayerAtSquare(final int num) {
+		return this.gameBoardConfiguration[num / 3][num % 3];
 	}
 
 	/**
 	 * Occupy square numbered num by player.
-	 * 
+	 *
 	 * @since 1.2
-	 * @param num
-	 *            number of square.
-	 * @param player
-	 *            player who occupies the square.
+	 * @param num    number of square.
+	 * @param player player who occupies the square.
 	 */
-	public void setPlayerAtSquare(int num, PlayerType player) {
-		gameBoardConfiguration[(int) (num / 3)][num % 3] = player;
+	public void setPlayerAtSquare(final int num, final PlayerType player) {
+		this.gameBoardConfiguration[num / 3][num % 3] = player;
 		swap(player);
 	}
 
 	/**
 	 * Evaluation interne d'une conf.
-	 * 
+	 *
 	 * @return int Evaluation interne
 	 * @since 1.1
 	 */
 	private int evaluationInterne() {
 		int evalMax = 0, evalMin = 0;
 		int evalTemp = 0;
-		PlayerType[][] tabP = getGameBoardConfiguration();
+		final PlayerType[][] tabP = getGameBoardConfiguration();
 
 		/* Parcours en ligne et colonne */
 		for (int parcours = 0; parcours < 2; parcours++) {
@@ -328,15 +321,13 @@ public class Configuration {
 
 	/**
 	 * Effectue un parcours en ligne via des modulo
-	 * 
-	 * @param tab
-	 *            Tableau de positions
-	 * @param x
-	 *            Numero de la ligne
+	 *
+	 * @param tab Tableau de positions
+	 * @param x   Numero de la ligne
 	 * @return int Nombre (modulo) interne.
 	 * @since 1.1
 	 */
-	private int parcoursLigne(PlayerType[][] tab, int x) {
+	private int parcoursLigne(final PlayerType[][] tab, final int x) {
 		int retour = 0;
 		for (int j = 0; j < 3; j++) {
 			switch (tab[x][j]) {
@@ -356,15 +347,13 @@ public class Configuration {
 
 	/**
 	 * Effectue un parcours en colonne via des modulo
-	 * 
-	 * @param tab
-	 *            Tableau de positions
-	 * @param y
-	 *            Numero de la colonne
+	 *
+	 * @param tab Tableau de positions
+	 * @param y   Numero de la colonne
 	 * @return int Nombre (modulo) interne.
 	 * @since 1.1
 	 */
-	private int parcoursColonne(PlayerType[][] tab, int y) {
+	private int parcoursColonne(final PlayerType[][] tab, final int y) {
 		int retour = 0;
 		for (int i = 0; i < 3; i++) {
 			switch (tab[i][y]) {
@@ -384,13 +373,12 @@ public class Configuration {
 
 	/**
 	 * Effectue un parcours en diagonale descendante.
-	 * 
-	 * @param tab
-	 *            Tableau de position
+	 *
+	 * @param tab Tableau de position
 	 * @return int Nombre (modulo) interne.
 	 * @since 1.1
 	 */
-	private int parcoursDiagonaleDescendante(PlayerType[][] tab) {
+	private int parcoursDiagonaleDescendante(final PlayerType[][] tab) {
 		int retour = 0;
 		for (int i = 0; i < 3; i++) {
 			switch (tab[i][i]) {
@@ -410,13 +398,12 @@ public class Configuration {
 
 	/**
 	 * Effectue un parcours en diagonale montante.
-	 * 
-	 * @param tab
-	 *            Tableau de position
+	 *
+	 * @param tab Tableau de position
 	 * @return int Nombre (modulo) interne.
 	 * @since 1.1
 	 */
-	private int parcoursDiagonaleMontante(PlayerType[][] tab) {
+	private int parcoursDiagonaleMontante(final PlayerType[][] tab) {
 		int retour = 0;
 		for (int i = 2; i >= 0; i--) {
 			switch (tab[i][Math.abs(i - 2)]) {
@@ -436,14 +423,14 @@ public class Configuration {
 
 	/**
 	 * Returns player whose turn it is.
-	 * 
+	 *
 	 * @see PlayerType
 	 * @return enum either XPLAYER or OPLAYER
 	 * @since 1.1
 	 */
 	public PlayerType determineWinner() {
-		int pDD = parcoursDiagonaleDescendante(gameBoardConfiguration);
-		int pDM = parcoursDiagonaleMontante(gameBoardConfiguration);
+		final int pDD = parcoursDiagonaleDescendante(this.gameBoardConfiguration);
+		final int pDM = parcoursDiagonaleMontante(this.gameBoardConfiguration);
 
 		int pC, pL;
 
@@ -454,8 +441,8 @@ public class Configuration {
 			return PlayerType.XPLAYER;
 		}
 		for (int i = 0; i < 3; i++) {
-			pC = parcoursColonne(gameBoardConfiguration, i);
-			pL = parcoursLigne(gameBoardConfiguration, i);
+			pC = parcoursColonne(this.gameBoardConfiguration, i);
+			pL = parcoursLigne(this.gameBoardConfiguration, i);
 			if (pC == 9 || pL == 9) {
 				return PlayerType.OPLAYER;
 			}
@@ -465,5 +452,4 @@ public class Configuration {
 		}
 		return PlayerType.NONE;
 	}
-
 }
