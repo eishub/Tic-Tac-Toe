@@ -373,12 +373,6 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 		return null;
 	}
 
-	/**
-	 * DOC
-	 *
-	 * @param parameters
-	 * @throws ManagementException
-	 */
 	private void processParameters(final Map<String, Parameter> parameters) throws ManagementException {
 		// Class InitKeys lists all valid keys.
 		for (final String key : parameters.keySet()) {
