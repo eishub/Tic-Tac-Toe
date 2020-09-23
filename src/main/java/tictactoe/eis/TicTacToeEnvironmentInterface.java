@@ -211,6 +211,7 @@ public class TicTacToeEnvironmentInterface extends EIDefaultImpl {
 		addList.removeAll(previous);
 		final List<Percept> delList = new ArrayList<>(previous);
 		delList.removeAll(percepts);
+		this.previousPercepts.put(entity, percepts);
 
 		final PlayerType winner = TicTacToe.getConfiguration().getWinner();
 		if (winner != null) {
